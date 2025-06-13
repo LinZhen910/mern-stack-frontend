@@ -8,6 +8,7 @@ import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Products from './components/Products';
 import Contact from './components/Contact';
+import Register from './components/Register'; // 导入新的Register组件
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -20,6 +21,8 @@ function App() {
         return <Products />;
       case 'contact':
         return <Contact />;
+      case 'register':
+        return <Register />; // 添加register页面
       default:
         return <Home setCurrentPage={setCurrentPage} />;
     }

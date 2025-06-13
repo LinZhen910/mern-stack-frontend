@@ -44,7 +44,7 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
             Products
           </a>
           <a 
-            className={`nav-link ${currentPage === 'contact' ? 'active' : ''}`} 
+            className={`nav-link me-3 ${currentPage === 'contact' ? 'active' : ''}`} 
             href="#" 
             onClick={(e) => {
               e.preventDefault();
@@ -52,6 +52,21 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
             }}
           >
             Contact
+          </a>
+          <a 
+            className={`nav-link ${currentPage === 'register' ? 'active' : ''}`} 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              setCurrentPage('register');
+            }}
+            style={{ 
+              color: currentPage === 'register' ? '#667eea' : '',
+              fontWeight: currentPage === 'register' ? '600' : ''
+            }}
+          >
+            <i className="bi bi-person-plus me-1"></i>
+            Register
           </a>
         </div>
       </div>
