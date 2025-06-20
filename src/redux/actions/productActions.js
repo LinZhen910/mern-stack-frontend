@@ -181,4 +181,17 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 };
 
 export const deleteProduct = (id) => async (dispatch) => {
-  dispatch({ type: DELETE_PRODUCT_R
+  dispatch({ type: DELETE_PRODUCT_REQUEST });
+  try {
+    // Simulate API processing time
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    console.log('✅ Mock API: Product deleted successfully', id);
+    dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: id });
+    toast.success('Product deleted successfully!');
+  } catch (error) {
+    console.error('❌ Mock API Delete Error:', error);
+    dispatch({ type: DELETE_PRODUCT_FAILURE, payload: error.message });
+    toast.error('Failed to delete product');
+  }
+};
