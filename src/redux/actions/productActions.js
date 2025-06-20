@@ -19,10 +19,11 @@ const API_BASE_URL = 'http://localhost:5001/api';
 export const fetchProducts = () => async (dispatch) => {
   dispatch({ type: FETCH_PRODUCTS_REQUEST });
   try {
-    const response = await fetch(`${API_BASE_URL}/products`);
+    const response = await fetch(`${API_BASE_URL}/products/public`);
     const data = await response.json();
     if (response.ok) {
-      dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: data });
+      // Transform the data to match the expected format
+      dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: data.data || data });
     } else {
       throw new Error(data.message || 'Failed to fetch products');
     }
