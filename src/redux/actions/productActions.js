@@ -21,13 +21,18 @@ export const fetchProducts = () => async (dispatch) => {
   try {
     const response = await fetch(`${API_BASE_URL}/products/public`);
     const data = await response.json();
+    console.log('API Response:', data); // 临时调试
+    
     if (response.ok) {
-      // Transform the data to match the expected format
-      dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: data.data || data });
+      // 确保传递的是产品数组，不是整个响应对象
+      const products = data.data || data;
+      console.log('Products array:', products); // 临时调试
+      dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: products });
     } else {
       throw new Error(data.message || 'Failed to fetch products');
     }
   } catch (error) {
+    console.error('Fetch error:', error);
     dispatch({ type: FETCH_PRODUCTS_FAILURE, payload: error.message });
     toast.error('Failed to fetch products');
   }

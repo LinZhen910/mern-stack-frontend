@@ -25,19 +25,38 @@ const productReducer = (state = initialState, action) => {
     case CREATE_PRODUCT_REQUEST:
       return { ...state, createLoading: true, error: null };
     case CREATE_PRODUCT_SUCCESS:
-      return { ...state, createLoading: false, items: [...state.items, action.payload], error: null };
+      return { 
+        ...state, 
+        createLoading: false, 
+        items: [...state.items, action.payload.data || action.payload], 
+        error: null 
+      };
     case CREATE_PRODUCT_FAILURE:
       return { ...state, createLoading: false, error: action.payload };
     case UPDATE_PRODUCT_REQUEST:
       return { ...state, updateLoading: true, error: null };
     case UPDATE_PRODUCT_SUCCESS:
-      return { ...state, updateLoading: false, items: state.items.map(item => item.id === action.payload.id ? action.payload : item), error: null };
+      return { 
+        ...state, 
+        updateLoading: false, 
+        items: state.items.map(item => 
+          item._id === (action.payload.data || action.payload)._id 
+            ? (action.payload.data || action.payload) 
+            : item
+        ), 
+        error: null 
+      };
     case UPDATE_PRODUCT_FAILURE:
       return { ...state, updateLoading: false, error: action.payload };
     case DELETE_PRODUCT_REQUEST:
       return { ...state, deleteLoading: true, error: null };
     case DELETE_PRODUCT_SUCCESS:
-      return { ...state, deleteLoading: false, items: state.items.filter(item => item.id !== action.payload), error: null };
+      return { 
+        ...state, 
+        deleteLoading: false, 
+        items: state.items.filter(item => item._id !== action.payload), 
+        error: null 
+      };
     case DELETE_PRODUCT_FAILURE:
       return { ...state, deleteLoading: false, error: action.payload };
     default:
